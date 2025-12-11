@@ -16,31 +16,31 @@ app.get('/hello/:person', function (req, res) {
 });
 
 // get user by id
-app.get('/user/:userId', function (req, res) {
+app.get('/menu/:menuId', function (req, res) {
     res.send('ดูข้อมูลผู้ใช้งาน')
 })
 // get all user
-app.get('/manu ', function (req, res) {
+app.get('/menu ', function (req, res) {
     res.send('เรียกข้อมูลผู้ใช้งาน')
 })
 // get all user
-app.get('/manu', function (req, res) {
+app.get('/menu', function (req, res) {
     res.send('เรียกข้อมูลผู้ใช้งานทั้งหมด')
 })
 
 // create user
-app.post('/user/', function (req, res) {
+app.post('/menu/', function (req, res) {
     res.send('ทำการสร้างผู้ใช้งาน: ' + JSON.stringify(req.body))
 })
 
 // edit user
-app.put('/user/:userId', function (req, res) {
-    res.send('ทำการแก้ไขผู้ใช้งาน: ' + req.params.userId + ' : ' + JSON.stringify(req.body))
+app.put('/menu/:menuId', function (req, res) {
+    res.send('ทำการแก้ไขผู้ใช้งาน: ' + req.params.menuId + ' : ' + JSON.stringify(req.body))
 })
 
 // delete user
-app.delete('/user/:userId', function (req, res) {
-    res.send('ทำการลบผู้ใช้งาน: ' + req.params.userId + ' : ' + JSON.stringify(req.body))
+app.delete('/menu/:menuId', function (req, res) {
+    res.send('ทำการลบผู้ใช้งาน: ' + req.params.menuId + ' : ' + JSON.stringify(req.body))
 })
 
 let port = process.env.PORT || 8081;
