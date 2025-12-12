@@ -6,42 +6,17 @@ const app = express();
 app.use(bodyParser.json()) 
 app.use(bodyParser.urlencoded({extended: true}))
 
+// เรียกใช้ routes โดยส่ง app เข้าไป
+require('./routes')(app)
+
 app.get('/status', (req, res) => {
-    res.send('Hello My Coffee!!')
+    res.send('Hello Node.js')
 });
 
 app.get('/hello/:person', function (req, res) {
     console.log('hello - ' + req.params.person)
     res.send('say hello with ' + req.params.person)
 });
-
-// get user by id
-app.get('/menu/:menuId', function (req, res) {
-    res.send('ดูข้อมูลผู้ใช้งาน')
-})
-// get all user
-app.get('/menu ', function (req, res) {
-    res.send('เรียกข้อมูลผู้ใช้งาน')
-})
-// get all user
-app.get('/menu', function (req, res) {
-    res.send('เรียกข้อมูลผู้ใช้งานทั้งหมด')
-})
-
-// create user
-app.post('/menu/', function (req, res) {
-    res.send('ทำการสร้างผู้ใช้งาน: ' + JSON.stringify(req.body))
-})
-
-// edit user
-app.put('/menu/:menuId', function (req, res) {
-    res.send('ทำการแก้ไขผู้ใช้งาน: ' + req.params.menuId + ' : ' + JSON.stringify(req.body))
-})
-
-// delete user
-app.delete('/menu/:menuId', function (req, res) {
-    res.send('ทำการลบผู้ใช้งาน: ' + req.params.menuId + ' : ' + JSON.stringify(req.body))
-})
 
 let port = process.env.PORT || 8081;
 
