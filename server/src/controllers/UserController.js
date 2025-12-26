@@ -1,7 +1,7 @@
 const {User} = require('../models')
 
 module.exports = {
-     // get all user
+    // get all user
     async index (req, res) {
         try {
             const users = await User.findAll()
@@ -25,7 +25,7 @@ module.exports = {
         }
     },
 
-     // edit user, suspend, active
+    // edit user, suspend, active
     async put (req, res) {
         try {
             await User.update(req.body, {
@@ -77,5 +77,4 @@ module.exports = {
         }
     }
 }
-
 
