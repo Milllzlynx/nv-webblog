@@ -8,14 +8,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
-app.get('/status', (req, res) => {
-    res.send('Hello Node.js Server!')
-});
-app.get('/hello/:name', function (req, res) {
-    console.log('hello - ' + req.params.name)
-    res.send('say hello with ' + req.params.name)
-});
-
 // เรียกใช้ Routes ที่เราแยกไฟล์ไว้
 require('./routes')(app)
 
@@ -25,3 +17,10 @@ sequelize.sync({ force: false }).then(() => {
     })
 })
 
+app.get('/status', (req, res) => {
+    res.send('Hello Node.js Server!')
+});
+app.get('/hello/:name', function (req, res) {
+    console.log('hello - ' + req.params.name)
+    res.send('say hello with ' + req.params.name)
+});
