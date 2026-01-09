@@ -14,8 +14,13 @@ export default {
   },
   created () {
     // ดึงค่า userId จาก URL
+    console.log("created userId:", this.userId)
+  },
+  mounted () {
     this.userId = this.$route.params.userId
+    console.log("mounted userId:", this.userId)
   }
+
 }
 </script>
 
