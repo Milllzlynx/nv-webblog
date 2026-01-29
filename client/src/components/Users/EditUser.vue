@@ -1,20 +1,20 @@
 <template>
-  <div>
-    <h1>Edit User</h1>
-    <form v-on:submit.prevent = "editUser">
+    <div>
+        <h1>Edit User</h1>
+        <form v-on:submit.prevent="editUser">
             <p>Name: <input type="text" v-model="user.name"></p>
             <p>Lastname: <input type="text" v-model="user.lastname"></p>
             <p>Email: <input type="text" v-model="user.email"></p>
             <p>Password: <input type="text" v-model="user.password"></p>
             <p><button type="submit">edit user</button></p>
-    </form>
-  </div>
+        </form>
+    </div>
 </template>
 
 <script>
-  import UsersService from '../../services/UsersService'
+import UsersService from '../../services/UsersService'
 export default {
-  data () {
+    data() {
         return {
             user: {
                 name: '',
@@ -26,7 +26,7 @@ export default {
         }
     },
     methods: {
-        async editUser () {
+        async editUser() {
             try {
                 await UsersService.put(this.user)
                 this.$router.push({
@@ -37,12 +37,12 @@ export default {
             }
         }
     },
-    async created () {
+    async created() {
         try {
             let userId = this.$route.params.userId
             this.user = (await UsersService.show(userId)).data
         } catch (error) {
-            console.log (error)
+            console.log(error)
         }
     }
 
