@@ -5,7 +5,7 @@
       <h4>จำนวนผู้ใช้งาน {{ users.length }}</h4>
       <div v-for="user in users" v-bind:key="user.id">
         <p>ID : {{ user.id }}</p>
-        <p>ชื่อ - นามสกุล : {{ user.name }}  {{ user.lastname }}</p>
+        <p>ชื่อ - นามสกุล : {{ user.name }} {{ user.lastname }}</p>
         <p>Email : {{ user.email }}</p>
         <p>Password : {{ user.password }}</p>
         <p>
@@ -22,44 +22,42 @@
 </template>
 
 <script>
-  import UsersService from '../../services/UsersService'
+import UsersService from '../../services/UsersService'
 export default {
   methods: {
-    navigateTo (route) {
+    navigateTo(route) {
       this.$router.push(route)
+    },
+    async deleteUser(user) {
+      let result = confirm("Want to delete?")
+      if (result) {
+        try {
+          await UsersService.delete(user)
+          this.refreshData()
+        } catch (err) {
+          console.log(err)
+        }
+      }
+    },
+    async refreshData() {
+      this.users = (await UsersService.index()).data
     }
   },
 
-  data () {
-        return {
-            users: []
-        }
-    },
-
-    async created () {
-      try {
-            this.users = (await UsersService.index()).data
-            console.log(this.users)
-        } catch (error) {
-            console.log(error)
-        }
-      },
-    async deleteUser (user) {
-      let result = confirm("Want to delete?")
-        if (result) {
-        try {
-            await UsersService.delete(user)
-            this.refreshData()
-        } catch (err) {
-            console.log(err)
-        }
+  data() {
+    return {
+      users: []
     }
-},
-    async refreshData() {
+  },
+
+  async created() {
+    try {
       this.users = (await UsersService.index()).data
-}
-
-
+      console.log(this.users)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 </script>
 
