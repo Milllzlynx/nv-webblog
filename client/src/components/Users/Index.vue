@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Get All Users</h1>
+    <p><button @click="navigateTo('/user/create')">สร้างผู้ใช้งาน</button></p>
     <div v-if="users.length">
       <h4>จำนวนผู้ใช้งาน {{ users.length }}</h4>
       <div v-for="user in users" v-bind:key="user.id">
@@ -16,8 +17,6 @@
         <hr />
       </div>
     </div>
-
-    <p><button @click="navigateTo('/user/create')">สร้างผู้ใช้งาน</button></p>
   </div>
 </template>
 
@@ -28,6 +27,7 @@ export default {
     navigateTo(route) {
       this.$router.push(route)
     },
+
     async deleteUser(user) {
       let result = confirm("Want to delete?")
       if (result) {
