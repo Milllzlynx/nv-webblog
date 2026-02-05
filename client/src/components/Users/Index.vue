@@ -2,6 +2,7 @@
   <div>
     <h1>Get All Users</h1>
     <p><button @click="navigateTo('/user/create')">สร้างผู้ใช้งาน</button></p>
+    <p><button v-on:click="logout">Logout</button></p>
     <div v-if="users.length">
       <h4>จำนวนผู้ใช้งาน {{ users.length }}</h4>
       <div v-for="user in users" v-bind:key="user.id">
@@ -22,12 +23,17 @@
 
 <script>
 import UsersService from '../../services/UsersService'
+import { useAuthenStore } from '../../stores/authen'
 export default {
+  data() {
+    return {
+      users: []
+    }
+  },
   methods: {
     navigateTo(route) {
       this.$router.push(route)
     },
-
     async deleteUser(user) {
       let result = confirm("Want to delete?")
       if (result) {
@@ -41,15 +47,17 @@ export default {
     },
     async refreshData() {
       this.users = (await UsersService.index()).data
-    }
-  },
+    },
 
-  data() {
-    return {
-      users: []
-    }
-  },
+    logout() {
+      const authenStore = useAuthenStore()
+      authenStore.logout() // เรียก action logout จาก store
 
+      this.$router.push({
+        name: 'login'
+      })
+    },
+  },
   async created() {
     try {
       this.users = (await UsersService.index()).data

@@ -1,3 +1,4 @@
+const isAuthenController = require('./controllers/isAuthenController')
 const UserController = require('./controllers/UserController')
 const UserAuthenController = require('./controllers/UserAuthenController')
 
@@ -11,7 +12,7 @@ module.exports = (app) => {
     // get user by id
     app.get('/user/:userId', UserController.show)
     // get all user
-    app.get('/users', UserController.index)
+    app.get('/users', isAuthenController, UserController.index)
 
     // Route สำหรับสมัครสมาชิก
     app.post('/login', UserAuthenController.login)
