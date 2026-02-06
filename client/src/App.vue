@@ -1,17 +1,19 @@
 <template>
   <div id="app">
+    <back-header />
     <router-view />
   </div>
 </template>
+
 <script>
 export default {
-  name: 'App'
-}
+  name: "App",
+};
 </script>
-<style>
 
+<style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   color: #2c3e50;
   margin-top: 20px;
 }
