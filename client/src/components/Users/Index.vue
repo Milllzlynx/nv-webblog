@@ -11,8 +11,12 @@
         <p>Email : {{ user.email }}</p>
         <p>Password : {{ user.password }}</p>
         <p>
-          <button v-on:click="navigateTo('/user/' + user.id)">ดูข้อมูลผู้ใช้</button>
-          <button v-on:click="navigateTo('/user/edit/' + user.id)">แก้ไขข้อมูล</button>
+          <button v-on:click="navigateTo('/user/' + user.id)">
+            ดูข้อมูลผู้ใช้
+          </button>
+          <button v-on:click="navigateTo('/user/edit/' + user.id)">
+            แก้ไขข้อมูล
+          </button>
           <button v-on:click="deleteUser(user)">ลบข้อมูล</button>
         </p>
         <hr />
@@ -22,51 +26,51 @@
 </template>
 
 <script>
-import UsersService from '../../services/UsersService'
-import { useAuthenStore } from '../../stores/authen'
+import UsersService from "../../services/UsersService";
+import { useAuthenStore } from "../../stores/authen";
 export default {
   data() {
     return {
-      users: []
+      users: [],
+    };
+  },
+  async created() {
+    try {
+      this.users = (await UsersService.index()).data;
+      console.log(this.users);
+    } catch (error) {
+      console.log(error);
     }
   },
   methods: {
     navigateTo(route) {
-      this.$router.push(route)
+      this.$router.push(route);
     },
     async deleteUser(user) {
-      let result = confirm("Want to delete?")
+      let result = confirm("Want to delete?");
       if (result) {
         try {
-          await UsersService.delete(user)
-          this.refreshData()
+          await UsersService.delete(user);
+          this.refreshData();
         } catch (err) {
-          console.log(err)
+          console.log(err);
         }
       }
     },
     async refreshData() {
-      this.users = (await UsersService.index()).data
+      this.users = (await UsersService.index()).data;
     },
 
     logout() {
-      const authenStore = useAuthenStore()
-      authenStore.logout() // เรียก action logout จาก store
+      const authenStore = useAuthenStore();
+      authenStore.logout(); // เรียก action logout จาก store
 
       this.$router.push({
-        name: 'login'
-      })
+        name: "login",
+      });
     },
   },
-  async created() {
-    try {
-      this.users = (await UsersService.index()).data
-      console.log(this.users)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-}
+};
 </script>
 
 <style scoped>
