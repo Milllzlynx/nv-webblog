@@ -11,23 +11,22 @@
 </template>
 
 <script>
-import UsersService from '../../services/UsersService'
+import UsersService from "../../services/UsersService";
 export default {
   data() {
     return {
-      user: null
-    }
+      user: null,
+    };
   },
   created() {
-    console.log("created userId:", this.user)
+    console.log("created userId:", this.user);
   },
   async mounted() {
-    var userId = this.$route.params.userId
-    this.user = (await UsersService.show(userId)).data
-    console.log("mounted userId:", this.user)
-  }
-
-}
+    var userId = this.$route.params.userId;
+    this.user = (await UsersService.show(userId)).data;
+    console.log("mounted userId:", this.user);
+  },
+};
 </script>
 
 <style scoped>
