@@ -36,6 +36,8 @@ module.exports = (app) => {
     // Route สำหรับ Upload โดยเฉพาะ
     // logic: เรียก middleware ก่อน -> ถ้าผ่าน -> เรียก controller
     app.post('/upload', fileUploadMiddleware, UploadController.upload)
+    // Delete File Route (เพิ่มใหม่)
+    app.post('/upload/delete', UploadController.deleteFile)
 }
 
 

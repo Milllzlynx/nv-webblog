@@ -1,9 +1,9 @@
 <template>
   <div>
     <h2>Get all blogs</h2>
+    <p><button v-on:click="navigateTo('/blog/create')">สร้าง blog</button></p>
     <p><button v-on:click="logout">Logout</button></p>
     <h4>จำนวน blog {{ blogs.length }}</h4>
-    <p><button v-on:click="navigateTo('/blog/create')">สร้าง blog</button></p>
     
     <div v-for="blog in blogs" v-bind:key="blog.id">
       <p>id: {{ blog.id }}</p>
